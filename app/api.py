@@ -11,9 +11,9 @@ def get_puzzle_all():
     puzzles = [dict(row) for row in rows]
     return jsonify(puzzles)
 
-@api_bp.route('/puzzle/<puzzle_id>')
-def get_puzzle(puzzle_id):
-    row = query_db("select * from puzzle where puzzle_id = ?", [puzzle_id], one=True )
+@api_bp.route('/puzzle/<id>')
+def get_puzzle(id):
+    row = query_db("select * from puzzle where id = ?", [id], one=True )
     if row:
         return jsonify(dict(row))
     else:

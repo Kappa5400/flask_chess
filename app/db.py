@@ -35,5 +35,20 @@ def save_puzzle_db(puzzle):
     )
     db.commit()
 
+def delete_puzzle_id_11():
+    result = query_db("SELECT 1 FROM puzzle WHERE id = 11", one=True)
+    if result == None:
+        print("There are only 10 puzzles in database.")
+        return 0
+    db = get_db()
+    db.execute(
+        """
+        DELETE FROM puzzle WHERE id = 11 
+        """
+    )
+    db.commit()
+    print("11th puzzle dropped from db")
+    return 1
+
 def init_app(app):
     app.teardown_appcontext(close_db)
