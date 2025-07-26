@@ -1,6 +1,6 @@
 
 import requests
-from datetime import datetime
+from datetime import date
 from .models import Puzzle
 
 def fetch_puzzle():
@@ -16,9 +16,9 @@ def fetch_puzzle():
         pgn = game["pgn"]
         answer = ",".join(puzzle["solution"])
         puzzle_rating = puzzle['rating']
-        date = datetime.utcnow().isoformat()
+        date_data = date.today()
 
-        return Puzzle(puzzle_id, pgn, answer, puzzle_rating, date)
+        return Puzzle(puzzle_id, pgn, answer, puzzle_rating, date_data)
 
 
     except (requests.RequestException, KeyError)  as e:

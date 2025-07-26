@@ -1,6 +1,8 @@
+from logging import exception
+
 from app import create_app
 from app.models import Puzzle
-from app.db import query_db, save_puzzle_db
+from app.db import query_db, save_puzzle_db, delete_puzzle_id_11
 from app.services import fetch_puzzle
 import sys
 
@@ -16,7 +18,13 @@ with app.app_context():
         if result is None:
             save_puzzle_db(new_puzzle)
             print("Inserted puzzle into DB.")
-            sys.exit(0)
+            try:
+                delete_puzzle_id_11()
+                sys.exit(0)
+            except Exception as e:
+                print(f"Error deleting 11th puzzle, {e}")
+                sys.exit(4)
+
         else:
             print("Puzzle already exists, duplicate.")
             sys.exit(3)
