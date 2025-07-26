@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Chessboard Local</title>
+  <title>Chessboard</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-1.0.0.min.css') }}">
   <style>
     #board1 {
@@ -23,9 +23,13 @@
   <script>
     const board = Chessboard('board1', {
       position: 'start',
-      draggable: false
+      draggable: false,
+      pieceTheme: '/static/img/chesspieces/wikipedia/{piece}.png'
     });
   </script>
+  <p>Puzzle!
+    <a href="{{ url_for('main.puzzle') }}">click me!</a>
+  </p>
 
 </body>
 </html>
