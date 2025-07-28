@@ -1,35 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Puzzle</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-1.0.0.min.css') }}">
-  <style>
-    #board1 {
-      width: 400px;
-      margin: 20px auto;
-    }
-  </style>
+{% extends "base.html" %}
 
+{% block title %}Chessboard{% endblock %}
+
+{% block head %}
+  {{ super() }}
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="{{ url_for('static', filename='js/chessboard-1.0.0.min.js') }}"></script>
-</head>
-<body>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-1.0.0.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-settings.css') }}">
+{% endblock %}
 
-  <h2 style="text-align: center;">Starting Position</h2>
+{% block content %}
+  <h2 class="text-center">Main puzzle</h2>
   <div id="board1"></div>
 
-  <script src="{{ url_for('static', filename='js/chessboard-1.0.0.min.js') }}"></script>
-  <script>
-    const board = Chessboard('board1', {
-      position: 'start',
-      draggable: false,
-      pieceTheme: '/static/img/chesspieces/wikipedia/{piece}.png'
-    });
-  </script>
-  <p>Go back?
-    <a href="{{ url_for('main.index') }}">click me!</a>
+  <p class="text-center mt-3">
+    go back? <a href="{{ url_for('main.index') }}">Click me!</a>
   </p>
+{% endblock %}
 
-</body>
-</html>
+{% block scripts %}
+  <script type="module" src="{{ url_for('static', filename='js/random-game.js') }}"></script>
+{% endblock %}
+
