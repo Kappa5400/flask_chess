@@ -2,7 +2,7 @@ from logging import exception
 
 from app import create_app
 from app.models import Puzzle
-from app.db import query_db, save_puzzle_db, delete_puzzle_id_11
+from app.db import query_db, save_puzzle_db, delete_oldest_puzzle
 from app.services import fetch_puzzle
 import sys
 
@@ -18,11 +18,13 @@ with app.app_context():
         if result is None:
             save_puzzle_db(new_puzzle)
             print("Inserted puzzle into DB.")
+            print("Attempting to delete oldest puzzle.")
             try:
-                delete_puzzle_id_11()
+                delete_oldest_puzzle()
+                print("Deleted oldest puzzle.")
                 sys.exit(0)
             except Exception as e:
-                print(f"Error deleting 11th puzzle, {e}")
+                print(f"Error deleting oldest puzzle, {e}")
                 sys.exit(4)
 
         else:

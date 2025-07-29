@@ -3,8 +3,12 @@ import requests
 from datetime import date
 from .models import Puzzle
 
+
+
 def fetch_puzzle():
+
     try:
+
         raw = requests.get("https://lichess.org/api/puzzle/daily")
         if raw.status_code != 200:
             raise requests.RequestException(f"Bad status: {raw.status_code}")
@@ -17,7 +21,6 @@ def fetch_puzzle():
         answer = ",".join(puzzle["solution"])
         puzzle_rating = puzzle['rating']
         date_data = date.today()
-
         return Puzzle(puzzle_id, pgn, answer, puzzle_rating, date_data)
 
 

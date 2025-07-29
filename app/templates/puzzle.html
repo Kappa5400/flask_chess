@@ -1,16 +1,21 @@
 {% extends "base.html" %}
 
-{% block title %}Chessboard{% endblock %}
+{% block title %} {{ date.strftime('%B %d') }} {% endblock %}
 
 {% block head %}
   {{ super() }}
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-1.0.0.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-settings.css') }}">
+  <script type="module" src="{{ url_for('static', filename='js/puzzle.js') }}"></script>
 {% endblock %}
 
 {% block content %}
-  <h2 class="text-center">Main puzzle</h2>
+  <div id="puzzle-data"
+       data-id="{{ puzzle.id }}"
+       data-pgn="{{ puzzle.pgn }}"></div>
+
+  <h2 class="text-center">{{ date.strftime('%B %d') }} Puzzle </h2>
   <div id="board1"></div>
 
   <p class="text-center mt-3">
@@ -19,6 +24,7 @@
 {% endblock %}
 
 {% block scripts %}
-  <script type="module" src="{{ url_for('static', filename='js/random-game.js') }}"></script>
+
+  <script type="module" src="{{ url_for('static', filename='js/puzzle.js') }}"></script>
 {% endblock %}
 

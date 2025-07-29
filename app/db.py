@@ -1,7 +1,9 @@
 import sqlite3
+
+import click
 from flask import g, current_app
 
-#db boilerplate
+#db func
 def get_db():
     if 'db' not in g:
         g.db = sqlite3.connect(current_app.config['DATABASE'])
@@ -35,20 +37,24 @@ def save_puzzle_db(puzzle):
     )
     db.commit()
 
-def delete_puzzle_id_11():
-    result = query_db("SELECT 1 FROM puzzle WHERE id = 11", one=True)
-    if result == None:
-        print("There are only 10 puzzles in database.")
-        return 0
+def delete_oldest_puzzle():
     db = get_db()
-    db.execute(
-        """
-        DELETE FROM puzzle WHERE id = 11 
-        """
-    )
+    db.execute("""
+        DELETE FROM puzzle
+        WHERE id = (
+            SELECT id FROM puzzle
+            ORDER BY date ASC
+            LIMIT 1
+        )
+    """)
     db.commit()
     print("11th puzzle dropped from db")
     return 1
+
+@click.command('init-db')
+def init_db_command():
+    init_db()
+    click.echo('Initialized the database.')
 
 def init_app(app):
     app.teardown_appcontext(close_db)
