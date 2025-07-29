@@ -5,14 +5,12 @@ from datetime import datetime
 
 
 
-
-
 bp = Blueprint('main', __name__)
 
 # views
 @bp.route("/")
 def index():
-    return render_template("index.html", title="index")
+    return render_template("old_index.html", title="index")
 
 @bp.route("/puzzle/<int:puzzle_id>")
 def puzzle(puzzle_id):

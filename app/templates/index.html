@@ -1,41 +1,39 @@
 {% extends "base.html" %}
 
-{% block title %}Chessboard{% endblock %}
-
-{% block head %}
-  {{ super() }}
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-1.0.0.min.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-settings.css') }}">
-{% endblock %}
+{% block title %}Home - Chess App{% endblock %}
 
 {% block content %}
-  <h2 class="text-center">Starting Position</h2>
-  <div id="board1"></div>
+<div class="container">
+  <h2 class="mb-4">Welcome to ChessPuzzles</h2>
 
-  <p class="text-center mt-3">
-    Puzzle 1! <a href="{{ url_for('main.puzzle', puzzle_id=1) }}">Click me!</a>
-    Puzzle 2! <a href="{{ url_for('main.puzzle', puzzle_id=2) }}">Click me!</a>
-  </p>
+  <!-- Chessboard Container -->
+  <div class="row mb-5">
+    <div class="col-md-6">
+      <div id="board" style="width: 400px"></div>
+    </div>
+    <div class="col-md-6 d-flex align-items-center">
+      <p>This is the starting position. Train daily to improve your tactical vision.</p>
+    </div>
+  </div>
 
-<p>
-  Puzzle <span id="puzzle-number-1">1</span>!
-  <a id="puzzle-link-1" href="#">Loading...</a>
-  Puzzle <span id="puzzle-number-2">1</span>!
-  <a id="puzzle-link-2" href="#">Loading...</a>
-  Puzzle <span id="puzzle-number-3">1</span>!
-  <a id="puzzle-link-3" href="#">Loading...</a>
-</p>
-
+  <!-- Puzzle Cards -->
+  <div class="row">
+    {% for i in range(1, 11) %}
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Puzzle {{ i }}</h5>
+            <a href="{{ url_for('main.puzzle', puzzle_id=i) }}" class="btn btn-primary">Go to Puzzle</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}
 
 {% block scripts %}
-  <script type="module" src="{{ url_for('static', filename='js/chess-init.js') }}"></script>
-  <script type="module">
-    import { injectPuzzleLink } from "{{ url_for('static', filename='js/offset.js') }}";
-    injectPuzzleLink(0);
-    injectPuzzleLink(1);
-    injectPuzzleLink(3);
-  </script>
-{% endblock %}
+<script>
 
+</script>
+{% endblock %}

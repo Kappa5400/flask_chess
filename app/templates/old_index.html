@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Chessboard{% endblock %}
+
+{% block head %}
+  {{ super() }}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-1.0.0.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-settings.css') }}">
+{% endblock %}
+
+{% block content %}
+  <h2 class="text-center">Starting Position</h2>
+  <div id="board1"></div>
+
+  <p class="text-center mt-3">
+    Puzzle 1! <a href="{{ url_for('main.puzzle', puzzle_id=1) }}">Click me!</a>
+    Puzzle 2! <a href="{{ url_for('main.puzzle', puzzle_id=2) }}">Click me!</a>
+  </p>
+
+<p>
+  Puzzle <span id="puzzle-number-1">1</span>!
+  <a id="puzzle-link-1" href="#">Loading...</a>
+  Puzzle <span id="puzzle-number-2">1</span>!
+  <a id="puzzle-link-2" href="#">Loading...</a>
+  Puzzle <span id="puzzle-number-3">1</span>!
+  <a id="puzzle-link-3" href="#">Loading...</a>
+</p>
+
+{% endblock %}
+
+{% block scripts %}
+  <script type="module" src="{{ url_for('static', filename='js/chess-init.js') }}"></script>
+  <script type="module">
+    import { injectPuzzleLink } from "{{ url_for('static', filename='js/offset.js') }}";
+    injectPuzzleLink(0);
+    injectPuzzleLink(1);
+    injectPuzzleLink(3);
+  </script>
+{% endblock %}
+

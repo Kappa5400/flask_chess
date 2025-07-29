@@ -1,5 +1,6 @@
 import { chessGame, board } from './chess-init.js';
 
+
 const data = document.getElementById('puzzle-data');
 const puzzleId = data.dataset.id;
 const puzzlePgn = data.dataset.pgn;
