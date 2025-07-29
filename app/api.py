@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify
 from app.db import query_db
 from app.models import Puzzle
-
+from .db import get_db
 
 api_bp = Blueprint('api', __name__, url_prefix='/api' )
 
@@ -18,3 +18,20 @@ def get_puzzle(id):
         return jsonify(dict(row))
     else:
         return jsonify({"error": "Puzzle not found"}), 404
+
+@api_bp.route('/puzzle/<int:offset>')
+def puzzle_offset(offset):
+    offset = int(offset)
+    if offset >= 10 or offset < 0:
+        return jsonify({"Error": "Offset our of range"}), 404
+
+    db = get_db()
+    puzzle = db.execute(
+        "SELECT * FROM puzzle ORDER BY date ASC LIMIT 1 OFFSET ?",
+        (offset,)
+    ).fetchone()
+
+    if puzzle is None:
+        return jsonify({"Error": "No puzzle found"}), 404
+
+    return jsonify(dict(puzzle))
