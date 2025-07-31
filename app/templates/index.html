@@ -2,38 +2,42 @@
 
 {% block title %}Home - Chess App{% endblock %}
 
+{% block head %}
+  {{ super() }}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-1.0.0.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-settings.css') }}">
+{% endblock %}
+
 {% block content %}
 <div class="container">
-  <h2 class="mb-4">Welcome to ChessPuzzles</h2>
+  <h2 class="mb-4">Chess Puzzles</h2>
 
   <!-- Chessboard Container -->
   <div class="row mb-5">
-    <div class="col-md-6">
-      <div id="board" style="width: 400px"></div>
-    </div>
-    <div class="col-md-6 d-flex align-items-center">
-      <p>This is the starting position. Train daily to improve your tactical vision.</p>
+
+      <div id="board1" style="width: 400px"></div>
     </div>
   </div>
 
   <!-- Puzzle Cards -->
   <div class="row">
-    {% for i in range(1, 11) %}
+    {% for i in range(1, 10) %}
       <div class="col-md-4 mb-3">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Puzzle {{ i }}</h5>
-            <a href="{{ url_for('main.puzzle', puzzle_id=i) }}" class="btn btn-primary">Go to Puzzle</a>
+            <a href="{{ url_for('main.puzzle_offset', offset=i) }}" class="btn btn-primary">Go to Puzzle</a>
           </div>
         </div>
       </div>
     {% endfor %}
   </div>
-</div>
 {% endblock %}
 
 {% block scripts %}
-<script>
-
+<script src="{{ url_for('static', filename='js/chessboard-1.0.0.min.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='js/chess-init.js') }}"></script>
+  <script type="module">
 </script>
 {% endblock %}
