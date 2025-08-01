@@ -2,4 +2,10 @@
 #board1 {
   width: 400px;
   margin: 20px auto;
+  visibility: hidden;
+  transition: visibility 0.3s ease;
+}
+
+#board1.visible {
+  visibility: visible;
 }
