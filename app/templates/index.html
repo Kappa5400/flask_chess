@@ -22,11 +22,11 @@
 
   <!-- Puzzle Cards -->
   <div class="row">
-    {% for i in range(1, 10) %}
+    {% for i in range(0, 9) %}
       <div class="col-md-4 mb-3">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Puzzle {{ i }}</h5>
+            <h5 class="card-title">Puzzle {{ i+1 }}</h5>
             <a href="{{ url_for('main.puzzle_offset', offset=i) }}" class="btn btn-primary">Go to Puzzle</a>
           </div>
         </div>
