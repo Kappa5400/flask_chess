@@ -1,0 +1,36 @@
+
+{% extends "base.html" %}
+
+{% block title %}About Page{% endblock %}
+
+{% block head %}
+  {{ super() }}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-1.0.0.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-settings.css') }}">
+{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">About Page</h2>
+
+<p>
+    This is a basic portforlio website to display basic backend and frontend capabilities.<br>
+    Code can be found here: https://github.com/Kappa5400/flask_chess<br>
+    All chess puzzles come from the lichess api app. The daily puzzle comes from the lichess daily puzzle api endpoint.<br><br>
+    Lichess api:<br>
+    https://lichess.org/api<br><br>
+    Libraries used:<br>
+    chess.js:<br> https://github.com/jhlywa/chess.js/tree/master<br>
+    chessboard.js:<br> https://github.com/oakmac/chessboardjs<br>
+</p>
+
+ <div class="row mb-5">
+     <div id="board1" style="width: 400px"></div>
+ </div>
+
+{% endblock content %}
+
+{% block scripts %}
+<script type="module" src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
+

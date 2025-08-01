@@ -46,3 +46,7 @@ def puzzle_offset(offset):
         return jsonify({"Error": "No puzzle found"}), 404
 
     return render_template("puzzle.html", title="puzzle", puzzle=puzzle, date=date)
+
+@bp.route("/about")
+def about():
+    return render_template("about.html", title="about")
