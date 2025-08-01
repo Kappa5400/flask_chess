@@ -1,6 +1,6 @@
-from src.app import create_app
-from src.app import query_db, save_puzzle_db, delete_oldest_puzzle
-from src.app.services import fetch_puzzle
+from src.app_root import create_app
+from src.app_root import query_db, save_puzzle_db, delete_oldest_puzzle
+from src.app_code.services import fetch_puzzle
 import sys
 
 app = create_app()
