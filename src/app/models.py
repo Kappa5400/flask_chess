@@ -1,6 +1,3 @@
-from app.db import get_db
-
-
 #puzzle model
 
 class Puzzle():

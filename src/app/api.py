@@ -1,6 +1,5 @@
 from flask import Blueprint, jsonify
-from app.db import query_db
-from app.models import Puzzle
+from src.app.db import query_db
 from .db import get_db
 
 api_bp = Blueprint('api', __name__, url_prefix='/api' )
